@@ -1,0 +1,33 @@
+FROM java:8-alpine
+
+ENV DIGDAG_VERSION=0.8.15
+
+RUN apk add --no-cache curl && \
+    curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDAG_VERSION" && \
+    chmod +x /usr/bin/digdag && \
+    apk del curl && \
+    adduser -h /var/lib/digdag -g 'digdag user' -s /sbin/nologin -D digdag
+
+COPY digdag.properties /etc/digdag.properties
+
+USER digdag
+
+WORKDIR /var/lib/digdag
+
+ENV DB_TYPE=memory \
+    DB_USER=digdag \
+    DB_PASSWORD=digdag \
+    DB_HOST=127.0.0.1 \
+    DB_PORT=5432 \
+    DB_NAME=digdag 
+
+EXPOSE 65432
+CMD exec digdag server --bind 0.0.0.0 \
+                       --port 65432 \
+                       --config /etc/digdag.properties \
+                       -X database.type=$DB_TYPE \
+                       -X database.user=$DB_USER \
+                       -X database.password=$DB_PASSWORD \
+                       -X database.host=$DB_HOST \
+                       -X database.port=$DB_PORT \
+                       -X database.database=$DB_NAME
