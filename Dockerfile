@@ -13,7 +13,8 @@ RUN apk --no-cache add curl && \
     apk --no-cache add ca-certificates groff less bash jq python py-pip py-setuptools && \
         rm -rf /var/cache/apk/* && \
     pip --no-cache-dir install awscli==1.11.101 boto3==1.4.4 && \
-    curl "https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz" | tar xvz -C /usr/bin
+    curl "https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz" | tar xvz -C /tmp && \
+        mv /tmp/docker/* /usr/bin/
 
 COPY digdag.properties /etc/digdag.properties
 

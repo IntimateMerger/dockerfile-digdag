@@ -14,7 +14,8 @@ RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDA
         apt-get clean && \
         rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* && \
     pip install awscli==1.11.101 boto3==1.4.4 && \
-    curl "https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz" | tar xvz -C /usr/bin
+    curl "https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz" | tar xvz -C /tmp && \
+        mv /tmp/docker/* /usr/bin/
 
 COPY digdag.properties /etc/digdag.properties
 
