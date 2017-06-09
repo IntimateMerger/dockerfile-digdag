@@ -14,7 +14,9 @@ RUN apk --no-cache add curl && \
         rm -rf /var/cache/apk/* && \
     pip --no-cache-dir install awscli==1.11.101 boto3==1.4.4 && \
     curl "https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz" | tar xvz -C /tmp && \
-        mv /tmp/docker/* /usr/bin/
+        mv /tmp/docker/* /usr/bin/ && \
+        addgroup -g 497 docker && \
+        adduser digdag docker
 
 COPY digdag.properties /etc/digdag.properties
 
