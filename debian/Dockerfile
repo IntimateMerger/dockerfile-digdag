@@ -1,5 +1,7 @@
 FROM java:8
 
+LABEL maintainer "mats116 <mats.kazuki@gmail.com>"
+
 ENV DIGDAG_VERSION=0.9.12 \
     DIGDAG_HOME=/var/lib/digdag \
     DOCKER_VERSION=17.03.1-ce
