@@ -26,7 +26,7 @@ It is recommended that you use PostgreSQL when using digdag in production.
 ```shell
 docker pull intimatemerger/digdag-server:latest
 docker run -p 65432:65432 -it intimatemerger/digdag-server:latest \
-    -X database.type=posgresql \
+    -X database.type=postgresql \
     -X database.user=digdag \
     -X database.password=digdag \
     -X database.host=10.0.0.1 \
