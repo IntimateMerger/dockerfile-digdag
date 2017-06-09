@@ -1,18 +1,35 @@
-# dockerfile-digdag-server
+# digdag-server
 
 Dockerfile for [digdag](https://github.com/treasure-data/digdag)
 
+The dockerfile is inspired by [this repository](https://github.com/myui/dockernized-digdag-server).
+
 ## How to use this image
 
-### Environment
+You can used our [docker image](https://hub.docker.com/r/intimatemerger/digdag-server/) in Dockerhub.
 
-If you don't set the env, digdag use the default env.
+```shell
+docker pull intimatemerger/digdag-server:latest
+docker run -p 65432:65432 -it intimatemerger/digdag-server:latest
+```
 
-| name | default | description |
-| --- | --- | --- |
-| DB_TYPE | memory | exp.) postgresql  |
-| DB_USER | digdag | for postgresql |
-| DB_PASSWORD | digdag | for postgresql |
-| DB_HOST | 127.0.0.1 | for postgresql |
-| DB_PORT | 5432 | for postgresql |
-| DB_NAME | digdag | for postgresql |
+### Parameters
+
+Check [the command reference](http://docs.digdag.io/command_reference.html#server)
+
+### Exanple
+
+#### for Posgresql
+
+It is recommended that you use PostgreSQL when using digdag in production.
+
+```shell
+docker pull intimatemerger/digdag-server:latest
+docker run -p 65432:65432 -it intimatemerger/digdag-server:latest \
+    -X database.type=posgresql \
+    -X database.user=digdag \
+    -X database.password=digdag \
+    -X database.host=10.0.0.1 \
+    -X database.port=5432 \
+    -X database.database=digdag
+```

@@ -1,17 +1,18 @@
-FROM java:8-alpine
+FROM java:8
 
 ENV DIGDAG_VERSION=0.9.12 \
     DIGDAG_HOME=/var/lib/digdag
 
-RUN apk --no-cache add curl && \
-    curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDAG_VERSION" && \
+RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDAG_VERSION" && \
     chmod +x /usr/bin/digdag && \
-    adduser -h $DIGDAG_HOME -g 'digdag user' -s /sbin/nologin -D digdag && \
+    useradd -b $DIGDAG_HOME -c 'digdag user' -s /sbin/nologin digdag && \
         mkdir -p $DIGDAG_HOME/logs/tasks $DIGDAG_HOME/logs/server && \
         chown -R digdag.digdag $DIGDAG_HOME && \
-    apk --no-cache add ca-certificates groff less bash jq python py-pip py-setuptools && \
-        rm -rf /var/cache/apk/* && \
-    pip --no-cache-dir install awscli==1.11.101 boto3==1.4.4
+    apt-get update && \
+        apt-get install -y ca-certificates groff less jq python-pip && \
+        apt-get clean && \
+        rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* && \
+    pip install awscli==1.11.101 boto3==1.4.4
 
 COPY digdag.properties /etc/digdag.properties
 
