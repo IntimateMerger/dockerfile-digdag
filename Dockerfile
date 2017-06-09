@@ -21,6 +21,6 @@ USER digdag
 
 WORKDIR /var/lib/digdag
 
-#EXPOSE 65432
-#ENTRYPOINT ["/bin/sh", "/usr/bin/digdag", "server", "--bind", "0.0.0.0", "--port", "65432", "--config", "/etc/digdag.properties"]
-#CMD ["-X", "database.type=memory"]
+EXPOSE 65432
+ENTRYPOINT ["/bin/sh", "/usr/bin/digdag", "server", "--bind", "0.0.0.0", "--port", "65432", "--config", "/etc/digdag.properties"]
+CMD ["-X", "database.type=memory"]
