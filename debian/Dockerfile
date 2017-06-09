@@ -17,6 +17,11 @@ RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDA
     curl "https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz" | tar xvz -C /tmp && \
         mv /tmp/docker/* /usr/bin/
 
+ENV AS_TOOLS_VERSION=3.13.0.1
+RUN curl "http://artifacts.aerospike.com/aerospike-tools/$AS_TOOLS_VERSION/aerospike-tools-$AS_TOOLS_VERSION-debian8.tgz" | tar xvz -C /tmp && \
+    dpkg -i /tmp/aerospike-tools-$AS_TOOLS_VERSION-debian8/aerospike-tools-$AS_TOOLS_VERSION.debian8.x86_64.deb && \
+    rm -rf /tmp/aerospike-tools-$AS_TOOLS_VERSION-debian8
+
 COPY digdag.properties /etc/digdag.properties
 
 USER digdag
