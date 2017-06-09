@@ -9,8 +9,11 @@ RUN apk --no-cache add curl && \
     adduser -h $DIGDAG_HOME -g 'digdag user' -s /sbin/nologin -D digdag && \
         mkdir -p $DIGDAG_HOME/logs/tasks $DIGDAG_HOME/logs/server && \
         chown -R digdag.digdag $DIGDAG_HOME && \
-    apk --no-cache add ca-certificates groff less bash jq python py-pip py-setuptools && \
-        rm -rf /var/cache/apk/* && \
+    apk --no-cache add \
+        ca-certificates groff less bash jq \
+        python py-pip py-setuptools \
+        docker && \
+    rm -rf /var/cache/apk/* && \
     pip --no-cache-dir install awscli==1.11.101 boto3==1.4.4
 
 COPY digdag.properties /etc/digdag.properties
