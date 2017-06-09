@@ -1,7 +1,8 @@
 FROM java:8
 
 ENV DIGDAG_VERSION=0.9.12 \
-    DIGDAG_HOME=/var/lib/digdag
+    DIGDAG_HOME=/var/lib/digdag \
+    DOCKER_VERSION=17.03.1-ce
 
 RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDAG_VERSION" && \
     chmod +x /usr/bin/digdag && \
@@ -12,7 +13,8 @@ RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDA
         apt-get install -y ca-certificates groff less jq python-pip && \
         apt-get clean && \
         rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* && \
-    pip install awscli==1.11.101 boto3==1.4.4
+    pip install awscli==1.11.101 boto3==1.4.4 && \
+    curl "https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz" | tar xvz -C /usr/bin
 
 COPY digdag.properties /etc/digdag.properties
 
