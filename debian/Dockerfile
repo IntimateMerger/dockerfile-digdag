@@ -6,25 +6,25 @@ ENV DIGDAG_VERSION=0.9.12 \
     DIGDAG_HOME=/var/lib/digdag \
     DOCKER_VERSION=17.03.1-ce
 
+COPY digdag.properties /etc/digdag.properties
+COPY requirements.txt requirements.txt
+
 RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDAG_VERSION" && \
     chmod +x /usr/bin/digdag && \
     useradd -b $DIGDAG_HOME -c 'digdag user' -s /sbin/nologin digdag && \
-        mkdir -p $DIGDAG_HOME/logs/tasks $DIGDAG_HOME/logs/server && \
-        chown -R digdag.digdag $DIGDAG_HOME && \
+    mkdir -p $DIGDAG_HOME/logs/tasks $DIGDAG_HOME/logs/server && \
+    chown -R digdag.digdag $DIGDAG_HOME && \
     apt-get update && \
-        apt-get install -y ca-certificates groff less jq python-pip && \
-        apt-get clean && \
-        rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* && \
-    pip install awscli==1.11.101 boto3==1.4.4 && \
+    apt-get install -y ca-certificates groff less jq python python-pip python-dev libssl-dev && \
+    apt-get clean && \
+    rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* && \
+    # Docker
     curl "https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz" | tar xvz -C /tmp && \
-        mv /tmp/docker/* /usr/bin/
-
-ENV AS_TOOLS_VERSION=3.13.0.1
-RUN curl "http://artifacts.aerospike.com/aerospike-tools/$AS_TOOLS_VERSION/aerospike-tools-$AS_TOOLS_VERSION-debian8.tgz" | tar xvz -C /tmp && \
-    dpkg -i /tmp/aerospike-tools-$AS_TOOLS_VERSION-debian8/aerospike-tools-$AS_TOOLS_VERSION.debian8.x86_64.deb && \
-    rm -rf /tmp/aerospike-tools-$AS_TOOLS_VERSION-debian8
-
-COPY digdag.properties /etc/digdag.properties
+    mv /tmp/docker/* /usr/bin/ && \
+    groupadd -g 497 docker && \
+    gpasswd -a digdag docker && \
+    # Python
+    pip install -r requirements.txt
 
 USER digdag
 
