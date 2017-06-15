@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  digdag:
+    build: .
+    container_name: digdag
+    environment:
+      TZ: Asia/Tokyo
+    restart: always
+  nginx:
+    build: nginx/
+    container_name: nginx
+    ports:
+      - "80:80"
+    links:
+      - digdag:digdag
+    restart: always
