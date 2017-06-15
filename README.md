@@ -1,8 +1,14 @@
-# digdag-server
+# digdag
 
 Dockerfile for [digdag](https://github.com/treasure-data/digdag)
 
-The dockerfile is inspired by [this repository](https://github.com/myui/dockernized-digdag-server).
+## Supported tags and respective Dockerfile links
+
+- `0.9.12`, `latest` ([Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag-server/blob/master/Dockerfile))
+- `0.9.12-debian`, `latest-debian` ([debian/Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag-server/blob/master/debian/Dockerfile))
+    - Customized image for Intimate Merger.
+- `nginx` ([debian/Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag-server/blob/master/nginx/Dockerfile))
+    - Nginx for reverse proxy.
 
 ## How to use this image
 

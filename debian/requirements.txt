@@ -1,3 +1,4 @@
 aerospike==2.1.0
 awscli==1.11.101
 boto3==1.4.4
+elasticsearch==5.4
