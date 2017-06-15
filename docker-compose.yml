@@ -6,6 +6,8 @@ services:
     container_name: digdag
     environment:
       TZ: Asia/Tokyo
+    ports:
+      - "65432:65432"
     restart: always
   nginx:
     build: nginx/
