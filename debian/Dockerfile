@@ -6,7 +6,6 @@ ENV DIGDAG_VERSION=0.9.12 \
     DIGDAG_HOME=/var/lib/digdag \
     DOCKER_VERSION=17.03.1-ce
 
-COPY digdag.properties /etc/digdag.properties
 COPY requirements.txt requirements.txt
 
 RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDAG_VERSION" && \
@@ -26,10 +25,11 @@ RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDA
     # Python
     pip install -r requirements.txt
 
+COPY digdag.properties /etc/digdag.properties
+
 USER digdag
 
 WORKDIR /var/lib/digdag
 
 EXPOSE 65432
-ENTRYPOINT ["/bin/sh", "/usr/bin/digdag", "server", "--bind", "0.0.0.0", "--port", "65432", "--config", "/etc/digdag.properties"]
-CMD ["-X", "database.type=memory"]
+CMD digdag server --config /etc/digdag.properties --memory
