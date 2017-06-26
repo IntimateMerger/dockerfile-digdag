@@ -31,4 +31,5 @@ USER digdag
 WORKDIR /var/lib/digdag
 
 EXPOSE 65432
-CMD digdag server --config /etc/digdag.properties --memory
+ENTRYPOINT ["/bin/sh", "/usr/bin/digdag"]
+CMD ["server", "--config", "/etc/digdag.properties", "--memory"]
