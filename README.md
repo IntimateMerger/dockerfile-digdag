@@ -7,7 +7,7 @@ Dockerfile for [digdag](https://github.com/treasure-data/digdag)
 - `0.9.13`, `latest` ([Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag/blob/master/Dockerfile))
 - `0.9.13-debian`, `latest-debian` ([debian/Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag/blob/master/debian/Dockerfile))
     - Customized image for Intimate Merger.
-- `nginx` ([debian/Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag/blob/master/nginx/Dockerfile))
+- `nginx` ([nginx/Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag/blob/master/nginx/Dockerfile))
     - Nginx for reverse proxy.
 
 ## How to use this image
