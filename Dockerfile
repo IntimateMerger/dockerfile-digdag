@@ -22,6 +22,13 @@ RUN apk --no-cache add curl && \
     # Embulk
     curl --create-dirs -o /usr/bin/embulk -L "https://dl.embulk.org/embulk-latest.jar" && \
     chmod +x /usr/bin/embulk && \
+    embulk gem install \
+        embulk-input-s3 \
+        embulk-output-s3 \
+        embulk-input-gcs \
+        embulk-output-gcs \
+        embulk-input-bigquery \
+        embulk-output-bigquery && \
     # Python
     pip --no-cache-dir install awscli boto3
 
