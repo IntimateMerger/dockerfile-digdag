@@ -1,3 +1,0 @@
-aerospike==2.1.2
-awscli==1.11.128
-boto3==1.4.5

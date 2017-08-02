@@ -1,12 +1,10 @@
-FROM java:8
+FROM jruby:9.1.12-jdk
 
 LABEL maintainer "mats116 <mats.kazuki@gmail.com>"
 
 ENV DIGDAG_VERSION=0.9.13 \
     DIGDAG_HOME=/var/lib/digdag \
     DOCKER_VERSION=17.06.0-ce
-
-COPY requirements.txt requirements.txt
 
 RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDAG_VERSION" && \
     chmod +x /usr/bin/digdag && \
@@ -22,8 +20,11 @@ RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDA
     mv /tmp/docker/* /usr/bin/ && \
     groupadd -g 497 docker && \
     gpasswd -a digdag docker && \
+    # Embulk
+    curl --create-dirs -o /usr/bin/embulk -L "https://dl.embulk.org/embulk-latest.jar" && \
+    chmod +x /usr/bin/embulk && \
     # Python
-    pip install -r requirements.txt
+    pip install awscli boto3
 
 COPY digdag.properties /etc/digdag.properties
 

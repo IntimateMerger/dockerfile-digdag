@@ -1,12 +1,10 @@
-FROM java:8-alpine
+FROM jruby:9.1.12-jdk-alpine
 
 LABEL maintainer "mats116 <mats.kazuki@gmail.com>"
 
 ENV DIGDAG_VERSION=0.9.13 \
     DIGDAG_HOME=/var/lib/digdag \
     DOCKER_VERSION=17.06.0-ce
-
-COPY requirements.txt requirements.txt
 
 RUN apk --no-cache add curl && \
     curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDAG_VERSION" && \
@@ -21,8 +19,11 @@ RUN apk --no-cache add curl && \
     mv /tmp/docker/* /usr/bin/ && \
     addgroup -g 497 docker && \
     adduser digdag docker && \
+    # Embulk
+    curl --create-dirs -o /usr/bin/embulk -L "https://dl.embulk.org/embulk-latest.jar" && \
+    chmod +x /usr/bin/embulk && \
     # Python
-    pip --no-cache-dir install -r requirements.txt
+    pip --no-cache-dir install awscli boto3
 
 COPY digdag.properties /etc/digdag.properties
 
