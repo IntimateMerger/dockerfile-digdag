@@ -23,19 +23,21 @@ RUN curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDA
     # Embulk
     curl --create-dirs -o /usr/bin/embulk -L "https://dl.embulk.org/embulk-latest.jar" && \
     chmod +x /usr/bin/embulk && \
-    embulk gem install \
-        embulk-input-s3 \
-        embulk-output-s3 \
-        embulk-input-gcs \
-        embulk-output-gcs \
-        embulk-input-bigquery \
-        embulk-output-bigquery && \
     # Python
     pip install awscli boto3
 
 COPY digdag.properties /etc/digdag.properties
 
 USER digdag
+
+# Embulk Plugins
+RUN embulk gem install \
+        embulk-input-s3 \
+        embulk-output-s3 \
+        embulk-input-gcs \
+        embulk-output-gcs \
+        embulk-input-bigquery \
+        embulk-output-bigquery
 
 WORKDIR /var/lib/digdag
 
