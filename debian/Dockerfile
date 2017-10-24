@@ -2,7 +2,7 @@ FROM jruby:9.1.12-jdk
 
 LABEL maintainer "mats116 <mats.kazuki@gmail.com>"
 
-ENV DIGDAG_VERSION=0.9.17 \
+ENV DIGDAG_VERSION=0.9.20 \
     DIGDAG_HOME=/var/lib/digdag \
     DOCKER_VERSION=17.09.0-ce
 
