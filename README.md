@@ -4,8 +4,8 @@ Dockerfile for [digdag](https://github.com/treasure-data/digdag)
 
 ## Supported tags and respective Dockerfile links
 
-- `0.9.16`, `latest` ([Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag/blob/master/Dockerfile))
-- `0.9.16-debian`, `latest-debian` ([debian/Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag/blob/master/debian/Dockerfile))
+- `0.9.20`, `latest` ([Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag/blob/master/Dockerfile))
+- `0.9.20-debian`, `latest-debian` ([debian/Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag/blob/master/debian/Dockerfile))
 - `nginx` ([nginx/Dockerfile](https://github.com/IntimateMerger/dockerfile-digdag/blob/master/nginx/Dockerfile))
     - Nginx for reverse proxy.
 

@@ -2,9 +2,9 @@ FROM jruby:9.1.12-jdk-alpine
 
 LABEL maintainer "mats116 <mats.kazuki@gmail.com>"
 
-ENV DIGDAG_VERSION=0.9.16 \
+ENV DIGDAG_VERSION=0.9.20 \
     DIGDAG_HOME=/var/lib/digdag \
-    DOCKER_VERSION=17.06.1-ce
+    DOCKER_VERSION=17.09.0-ce
 
 RUN apk --no-cache add curl && \
     curl -o /usr/bin/digdag --create-dirs -L "https://dl.digdag.io/digdag-$DIGDAG_VERSION" && \
