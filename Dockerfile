@@ -1,4 +1,4 @@
-FROM jruby:9.1.15-jdk-alpine
+FROM jruby:9.1.16-jdk-alpine
 
 LABEL maintainer "mats116 <mats.kazuki@gmail.com>"
 
