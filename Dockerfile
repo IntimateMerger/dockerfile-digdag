@@ -1,6 +1,6 @@
 FROM jruby:9.1.16-jdk-alpine
 
-LABEL maintainer "mats116 <mats.kazuki@gmail.com>"
+LABEL maintainer "IM-Tech <tech@intimatemerger.com>"
 
 ENV DIGDAG_VERSION=0.9.24 \
     DIGDAG_HOME=/var/lib/digdag \
